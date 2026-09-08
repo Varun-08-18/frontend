@@ -45,13 +45,63 @@ export default function Login() {
     <Box
       sx={{
         minHeight: "100vh",
+        position: "relative",
+        overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "#f5f5f5",
       }}
     >
-      <Paper sx={{ p: 4, width: 400 }}>
+      {/* Background Video */}
+      <Box
+        component="video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+        }}
+      >
+        <source
+          src="/login-bg.mp4"
+          type="video/mp4"
+        />
+      </Box>
+
+      {/* Dark Overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.45)",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Login Box */}
+      <Paper
+        elevation={10}
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          p: 4,
+          width: 400,
+          maxWidth: "90%",
+          borderRadius: 3,
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
         <Typography
           variant="h5"
           sx={{
@@ -64,7 +114,10 @@ export default function Login() {
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert
+            severity="error"
+            sx={{ mb: 2 }}
+          >
             {error}
           </Alert>
         )}
@@ -74,7 +127,9 @@ export default function Login() {
           label="Email"
           margin="normal"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
         />
 
         <TextField
@@ -83,19 +138,28 @@ export default function Login() {
           type="password"
           margin="normal"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
 
         <Button
           fullWidth
           variant="contained"
           size="large"
-          sx={{ mt: 3 }}
+          sx={{
+            mt: 3,
+            py: 1.3,
+            fontWeight: "bold",
+          }}
           onClick={handleLogin}
           disabled={loading}
         >
           {loading ? (
-            <CircularProgress size={24} color="inherit" />
+            <CircularProgress
+              size={24}
+              color="inherit"
+            />
           ) : (
             "Login"
           )}
@@ -109,7 +173,7 @@ export default function Login() {
           }}
           color="text.secondary"
         >
-          Try: admin@example.com / 123456
+          
         </Typography>
       </Paper>
     </Box>
